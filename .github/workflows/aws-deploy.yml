@@ -21,7 +21,7 @@ jobs:
       - name: get aws permissions
         uses: aws-actions/configure-aws-credentials@v4
         with: 
-          role-to-assume: arn:aws:iam::975049930561:role/github-infra
+          role-to-assume: arn:aws:iam::975049930561:role/GitHub-Users
           aws-region: eu-west-2  
 
       - name: Setup Terraform
@@ -43,5 +43,10 @@ jobs:
       - name: Terraform apply
         id: apply 
         run: terraform apply -auto-approve
+        working-directory: aws-deploy
+      
+      - name: Terraform destroy
+        id: destroy 
+        run: terraform destroy -auto-approve
         working-directory: aws-deploy
     
