@@ -18,10 +18,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4  
 
-      - name: get aws permissions
+      - name: configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with: 
-          role-to-assume: arn:aws:iam::975049930561:role/GitHub-Users
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
           aws-region: eu-west-2  
 
       - name: Setup Terraform
