@@ -13,12 +13,16 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: AWS-DEPLOYMENT
     
     steps:
-      - name: Checkout
+      - name: Checkout source code
         uses: actions/checkout@v4  
 
-      - name: configure AWS credentials using OIDC
+      - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with: 
           role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
@@ -31,22 +35,15 @@ jobs:
           terraform_wrapper: false
 
       - name: Terraform init
-        id: init
         run: terraform init
-        working-directory: AWS-DEPLOYMENT
 
       - name: Terraform plan
-        id: plan
         run: terraform plan
-        working-directory: AWS-DEPLOYMENT
         
       - name: Terraform apply
-        id: apply 
+        if: github.ref == 'refs/heads/master'
         run: terraform apply -auto-approve
-        working-directory: AWS-DEPLOYMENT
       
       - name: Terraform destroy
-        id: destroy 
         run: terraform destroy -auto-approve
-        working-directory: AWS-DEPLOYMENT
     
