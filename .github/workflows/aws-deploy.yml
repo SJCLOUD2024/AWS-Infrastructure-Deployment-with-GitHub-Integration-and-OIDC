@@ -44,6 +44,6 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: terraform apply -auto-approve
       
-      #- name: Terraform destroy
-       # run: terraform destroy -auto-approve
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
     
