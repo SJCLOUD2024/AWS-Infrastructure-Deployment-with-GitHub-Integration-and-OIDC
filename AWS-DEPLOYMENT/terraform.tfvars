@@ -5,5 +5,6 @@ vpc_cidr     = "10.0.0.0/16"
 
 # Network variables
 default-route     = "0.0.0.0/0"
+ec2_instance_type = "t2.micro"
 
 
