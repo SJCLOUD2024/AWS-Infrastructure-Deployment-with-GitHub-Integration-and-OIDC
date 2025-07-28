@@ -1,4 +1,4 @@
-resource "aws_instance" "this" {
+resource "aws_instance" "nginx" {
   ami                    = data.aws_ami.amazon_linux_2023.id
   instance_type          = var.ec2_instance_type
   subnet_id              = var.subnet_id
